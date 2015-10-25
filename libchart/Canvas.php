@@ -29,6 +29,19 @@ class Canvas{
 		$this->x = $leftBorder;
 		$this->y = $topBorder;
 	}
+	public function getRealImage(){
+		return $this->img;
+	}
+	public function getPalette(){
+		return $this->palette;
+	}
+	public function getRealLeftBorder(){
+		return $this->x;
+	}
+	public function getRealTopBorder(){
+		return $this->y;
+	}
+
 	public function writeTextWithCenterCenter($centerX, $centerY, $text, $size, $rgb, $font = FONT_NORM, $angle = 0.0){
 		ChartUtils::getTextDimensions($width, $height, $text, $size, $font, $angle);
 		imagettftext($this->img, $size, $angle, $this->x + $centerX - $width / 2, $this->y + $centerY + $height / 2, $this->palette->findColorRgb($rgb), $font, $text);
@@ -42,16 +55,26 @@ class Canvas{
 		imagettftext($this->img, $size, $angle, $this->x + $centerX - $width / 2, $this->y + $topBorder + $height, $this->palette->findColorRgb($rgb), $font, $text);
 	}
 
-	public function getRealImage(){
-		return $this->img;
+	/**
+	 * @param int $centerX
+	 * @param int $centerY
+	 * @param int $radius
+	 * @param double $start
+	 * @param double $end
+	 * @param int $color
+	 */
+	public function drawArc($centerX, $centerY, $radius, $start, $end, $color){
+		imagearc($this->img, $centerX + $this->x, $centerY + $this->y, $radius * 2, $radius * 2, $start, $end, $this->palette->findColorRgb($color));
 	}
-	public function getPalette(){
-		return $this->palette;
-	}
-	public function getRealLeftBorder(){
-		return $this->x;
-	}
-	public function getRealTopBorder(){
-		return $this->y;
+	/**
+	 * @param int $centerX
+	 * @param int $centerY
+	 * @param int $radius
+	 * @param double $start
+	 * @param double $end
+	 * @param int $color
+	 */
+	public function drawSector($centerX, $centerY, $radius, $start, $end, $color){
+		imagefilledarc($this->img, $centerX + $this->x, $centerY + $this->y, $radius * 2, $radius * 2, $start, $end, $this->palette->findColorRgb($color), IMG_ARC_PIE);
 	}
 }

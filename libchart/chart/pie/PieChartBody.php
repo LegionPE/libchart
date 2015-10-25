@@ -13,17 +13,19 @@
  * @author PEMapModder
  */
 
-namespace libchart\chart;
+namespace libchart\chart\pie;
 
 use libchart\object\LinearChartObjectLayout;
-use libchart\object\TextObject;
 
-abstract class Chart extends LinearChartObjectLayout{
-	/**
-	 * @return GeneralChartConfig
-	 */
-	public abstract function getConfig();
+class PieChartBody extends LinearChartObjectLayout{
+	/** @var PieChart */
+	private $main;
+	public function __construct(PieChart $main){
+		parent::__construct(self::ORIENTATION_HORIZONTAL);
+		$this->main = $main;
+		$this->init();
+	}
 	protected function init(){
-		$this->addObject(TextObject::fromLeftTop(0, 0, $this->getConfig()->title, $this->getConfig()->titleFontSize, $this->getConfig()->titleRgb, FONT_BOLD, 10, 10));
+		$this->addObject(new Pie($this->main));
 	}
 }

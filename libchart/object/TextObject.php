@@ -64,7 +64,7 @@ class TextObject extends PaddedChartObject{
 	 * @param int $vertPadding
 	 * @param int $horizPadding
 	 */
-	public function __construct($centerX, $topBorder, $text, $size, $color, $font = FONT_NORM, $angle = 0.0, $vertPadding, $horizPadding){
+	public function __construct($centerX, $topBorder, $text, $size, $color, $font = FONT_NORM, $vertPadding, $horizPadding, $angle = 0.0){
 		parent::__construct();
 		$this->centerX = $centerX;
 		$this->topBorder = $topBorder;
@@ -76,17 +76,17 @@ class TextObject extends PaddedChartObject{
 		$this->vertPadding = $vertPadding;
 		$this->horizPadding = $horizPadding;
 	}
-	public static function fromCenterCenter($centerX, $centerY, $text, $size, $color, $font = FONT_NORM, $angle = 0.0, $vertPadding, $horizPadding){
+	public static function fromCenterCenter($centerX, $centerY, $text, $size, $color, $font = FONT_NORM, $vertPadding, $horizPadding, $angle = 0.0){
 		ChartUtils::getTextDimensions($w, $height, $text, $size, $font, $angle);
-		return new TextObject($centerX, $centerY - $height / 2, $text, $size, $color, $font, $angle, $vertPadding, $horizPadding);
+		return new TextObject($centerX, $centerY - $height / 2, $text, $size, $color, $font, $vertPadding, $horizPadding, $angle);
 	}
-	public static function fromCenterBottom($centerX, $bottomBorder, $text, $size, $color, $font = FONT_NORM, $angle = 0.0, $vertPadding, $horizPadding){
+	public static function fromCenterBottom($centerX, $bottomBorder, $text, $size, $color, $font = FONT_NORM, $vertPadding, $horizPadding, $angle = 0.0){
 		ChartUtils::getTextDimensions($w, $height, $text, $size, $font, $angle);
-		return new TextObject($centerX, $bottomBorder - $height, $text, $size, $color, $font, $angle, $vertPadding, $horizPadding);
+		return new TextObject($centerX, $bottomBorder - $height, $text, $size, $color, $font, $vertPadding, $horizPadding, $angle);
 	}
-	public static function fromLeftTop($leftBorder, $topBorder, $text, $size, $color, $font = FONT_NORM, $angle = 0.0, $vertPadding, $horizPadding){
+	public static function fromLeftTop($leftBorder, $topBorder, $text, $size, $color, $font = FONT_NORM, $vertPadding, $horizPadding, $angle = 0.0){
 		ChartUtils::getTextDimensions($width, $h, $text, $size, $font, $angle);
-		return new TextObject($leftBorder + $width / 2, $topBorder, $text, $size, $color, $font, $angle, $vertPadding, $horizPadding);
+		return new TextObject($leftBorder + $width / 2, $topBorder, $text, $size, $color, $font, $vertPadding, $horizPadding, $angle);
 	}
 	public function getTopPadding(){
 		return $this->vertPadding;

@@ -47,7 +47,6 @@ class Palette{
 		}
 		return $this->colors[$hash] = imagecolorallocate($this->img, $r, $g, $b);
 	}
-
 	public function findColorRgb($rgb, $maxError = 10){
 		ChartUtils::colorUnhash($rgb, $r, $g, $b);
 		return $this->findColor($r, $g, $b, $maxError);

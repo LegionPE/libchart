@@ -13,16 +13,13 @@
  * @author PEMapModder
  */
 
-namespace libchart;
+namespace libchart\chart\pie;
 
-class GeneralChartConfig{
-	public $title;
-	public $titleFontSize;
-	public $titleRgb;
-	public $bgRgb;
-	public $leftPadding = 20;
-	public $rightPadding = 20;
-	public $titleTopPadding = 20;
-	public $titleBodyPadding = 20;
-	public $bottomPadding = 20;
+use libchart\chart\GeneralChartConfig;
+
+class PieChartConfig extends GeneralChartConfig{
+	public $radius;
+	public $keyColor;
+	public $keyTitleFontSize;
+	public $keyTextFontSize;
 }
