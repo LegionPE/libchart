@@ -54,12 +54,32 @@ abstract class ChartObject{
 	}
 
 	/**
+	 * @param int $bg
 	 * @return resource
 	 */
-	public function getImage(){
+	public function plot($bg){
 		$img = imagecreatetruecolor($this->getWidth(), $this->getHeight());
-		$canvas = new Canvas(new Palette($img), 0, 0);
+		$canvas = new Canvas($palette = new Palette($img), 0, 0);
+		imagefill($img, 0, 0, $palette->findColorRgb($bg));
 		$this->draw($canvas);
 		return $img;
+	}
+
+	/**
+	 * @param int $bg
+	 * @return string
+	 */
+	public function getPNG($bg){
+		ob_start();
+		$img = $this->plot($bg);
+		imagepng($img);
+		imagedestroy($img);
+		$buffer = ob_get_contents();
+		ob_end_clean();
+		return $buffer;
+	}
+
+	public function __toString(){
+		return get_class($this) . "($this->objectId)";
 	}
 }

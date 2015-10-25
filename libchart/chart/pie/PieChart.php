@@ -22,14 +22,13 @@ class PieChart extends Chart{
 	/** @var PieChartConfig */
 	private $config;
 	/** @var Datum[] */
-	public $data;
+	public $data = [];
 
 	public function __construct(PieChartConfig $config){
 		parent::__construct();
 		$this->config = $config;
-		$this->init();
 	}
-	protected function init(){
+	public function init(){
 		parent::init();
 		$this->addObject(new PieChartBody($this));
 	}

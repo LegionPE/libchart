@@ -45,6 +45,7 @@ class LinearChartObjectLayout extends PaddedChartObject{
 		$myWidth = $this->getWidth();
 		$myHeight = $this->getHeight();
 		foreach($this->objects as $object){
+			logDebug($object);
 			$width = $object->getWidth();
 			$height = $object->getHeight();
 			if($this->orientation === self::ORIENTATION_VERTICAL){

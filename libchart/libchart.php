@@ -13,6 +13,10 @@
  * @author PEMapModder
  */
 
+if(!defined("STDERR")){
+	define("STDERR", fopen("php://stderr", "wt"));
+}
+
 spl_autoload_register(function($class){
 	$dir = __DIR__ . "/../";
 	$file = $dir . str_replace("\\", DIRECTORY_SEPARATOR, $class) . ".php";
@@ -21,5 +25,11 @@ spl_autoload_register(function($class){
 	}
 }, true, true);
 
-define("FONT_NORM", realpath(__DIR__ . "/norm.ttf"));
-define("FONT_BOLD", realpath(__DIR__ . "/bold.ttf"));
+define("FONT_NORM", realpath(__DIR__ . "/../norm.ttf"));
+define("FONT_BOLD", realpath(__DIR__ . "/../bold.ttf"));
+
+function logDebug($line){
+	fwrite(STDERR, $line . PHP_EOL);
+}
+
+logDebug("===");

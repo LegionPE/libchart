@@ -111,4 +111,8 @@ class TextObject extends PaddedChartObject{
 	public function drawCore(Canvas $canvas){
 		$canvas->writeTextWithCenterTop($this->centerX, $this->topBorder, $this->text, $this->size, $this->color, $this->font, $this->angle);
 	}
+
+	public function __toString(){
+		return parent::__toString() . "[$this->text@$this->centerX:$this->topBorder]";
+	}
 }
