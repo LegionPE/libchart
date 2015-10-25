@@ -16,7 +16,7 @@
 namespace libchart\chart;
 
 use libchart\GeneralChartConfig;
-use libchart\LinearChartObjectLayout;
+use libchart\object\LinearChartObjectLayout;
 
 abstract class Chart extends LinearChartObjectLayout{
 	/**

@@ -32,4 +32,28 @@ class ChartUtils{
 			);
 		}
 	}
+
+	public static function colorHash($r, $g, $b){
+		return (($r & 0xFF) << 16) | (($g & 0xFF) << 8) | ($b & 0xFF);
+	}
+	public static function colorUnhash($rgb, &$r, &$g, &$b){
+		$b = $rgb & 0xFF;
+		$rgb >>= 8;
+		$g = $rgb & 0xFF;
+		$rgb >>= 8;
+		$r = $rgb & 0xFF;
+	}
+
+	public static function rgbDelta($rgb1, $rgb2){
+		self::colorUnhash($rgb1, $r1, $g1, $b1);
+		self::colorUnhash($rgb2, $r2, $g2, $b2);
+		return abs($r1 - $r2) + abs($g1 + $g2) + abs($b1 + $b2);
+	}
+	public static function rgbColorDelta($rgb1, $r2, $g2, $b2){
+		self::colorUnhash($rgb1, $r1, $g1, $b1);
+		return abs($r1 - $r2) + abs($g1 + $g2) + abs($b1 + $b2);
+	}
+	public static function colorDelta($r1, $g1, $b1, $r2, $g2, $b2){
+		return abs($r1 - $r2) + abs($g1 + $g2) + abs($b1 + $b2);
+	}
 }

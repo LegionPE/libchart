@@ -18,29 +18,35 @@ namespace libchart;
 class Canvas{
 	/** @var resource */
 	private $img;
-	private $x;
-	private $y;
+	/** @var Palette */
+	private $palette;
+	/** @var int */
+	private $x, $y;
 
-	public function __construct($img, $leftBorder, $topBorder){
-		$this->img = $img;
+	public function __construct(Palette $palette, $leftBorder, $topBorder){
+		$this->img = $palette->getImage();
+		$this->palette = $palette;
 		$this->x = $leftBorder;
 		$this->y = $topBorder;
 	}
-	public function writeTextWithCenter($centerX, $centerY, $text, $size, $color, $font = FONT_NORM, $angle = 0.0){
+	public function writeTextWithCenterCenter($centerX, $centerY, $text, $size, $rgb, $font = FONT_NORM, $angle = 0.0){
 		ChartUtils::getTextDimensions($width, $height, $text, $size, $font, $angle);
-		imagettftext($this->img, $size, $angle, $this->x + $centerX - $width / 2, $this->y + $centerY + $height / 2, $color, $font, $text);
+		imagettftext($this->img, $size, $angle, $this->x + $centerX - $width / 2, $this->y + $centerY + $height / 2, $this->palette->findColorRgb($rgb), $font, $text);
 	}
-	public function writeTextWithLeftTop($leftBorder, $topBorder, $text, $size, $color, $font = FONT_NORM, $angle = 0.0){
+	public function writeTextWithLeftTop($leftBorder, $topBorder, $text, $size, $rgb, $font = FONT_NORM, $angle = 0.0){
 		ChartUtils::getTextDimensions($width, $height, $text, $size, $font, $angle);
-		imagettftext($this->img, $size, $angle, $this->x + $leftBorder, $this->y + $topBorder + $height, $color, $font, $text);
+		imagettftext($this->img, $size, $angle, $this->x + $leftBorder, $this->y + $topBorder + $height, $this->palette->findColorRgb($rgb), $font, $text);
 	}
-	public function writeTextWithMiddleTop($centerX, $topBorder, $text, $size, $color, $font = FONT_NORM, $angle = 0.0){
+	public function writeTextWithCenterTop($centerX, $topBorder, $text, $size, $rgb, $font = FONT_NORM, $angle = 0.0){
 		ChartUtils::getTextDimensions($width, $height, $text, $size, $font, $angle);
-		imagettftext($this->img, $size, $angle, $this->x + $centerX - $width / 2, $this->y + $topBorder + $height, $color, $font, $text);
+		imagettftext($this->img, $size, $angle, $this->x + $centerX - $width / 2, $this->y + $topBorder + $height, $this->palette->findColorRgb($rgb), $font, $text);
 	}
 
 	public function getRealImage(){
 		return $this->img;
+	}
+	public function getPalette(){
+		return $this->palette;
 	}
 	public function getRealLeftBorder(){
 		return $this->x;

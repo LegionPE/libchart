@@ -13,7 +13,9 @@
  * @author PEMapModder
  */
 
-namespace libchart;
+namespace libchart\object;
+
+use libchart\Canvas;
 
 abstract class PaddedChartObject extends ChartObject{
 	public abstract function getTopPadding();
@@ -24,7 +26,7 @@ abstract class PaddedChartObject extends ChartObject{
 	public abstract function getCoreHeight();
 	public abstract function drawCore(Canvas $canvas);
 	public function draw(Canvas $canvas){
-		$subcanvas = new Canvas($canvas->getRealImage(), $canvas->getRealLeftBorder() + $this->getLeftPadding(), $canvas->getRealTopBorder() + $this->getTopPadding());
+		$subcanvas = new Canvas($canvas->getPalette(), $canvas->getRealLeftBorder() + $this->getLeftPadding(), $canvas->getRealTopBorder() + $this->getTopPadding());
 		$this->drawCore($subcanvas);
 	}
 

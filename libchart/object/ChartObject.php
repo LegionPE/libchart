@@ -13,9 +13,10 @@
  * @author PEMapModder
  */
 
-namespace libchart;
+namespace libchart\object;
 
 use IllegalStateException;
+use libchart\Canvas;
 
 abstract class ChartObject{
 	private static $nextId = 0;

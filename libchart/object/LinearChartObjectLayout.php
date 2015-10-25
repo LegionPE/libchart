@@ -13,7 +13,10 @@
  * @author PEMapModder
  */
 
-namespace libchart;
+namespace libchart\object;
+
+use libchart\Canvas;
+use libchart\ChartUtils;
 
 class LinearChartObjectLayout extends PaddedChartObject{
 	const ORIENTATION_VERTICAL = 0;
@@ -36,7 +39,7 @@ class LinearChartObjectLayout extends PaddedChartObject{
 	}
 
 	public function drawCore(Canvas $canvas){
-		$realImage = $canvas->getRealImage();
+		$palette = $canvas->getPalette();
 		$x = $canvas->getRealLeftBorder();
 		$y = $canvas->getRealTopBorder();
 		$myWidth = $this->getWidth();
@@ -55,7 +58,7 @@ class LinearChartObjectLayout extends PaddedChartObject{
 				$canvasY = $centerY - $height / 2;
 				$x += $width;
 			}
-			$object->draw(new Canvas($realImage, $canvasX, $canvasY));
+			$object->draw(new Canvas($palette, $canvasX, $canvasY));
 		}
 	}
 	public function getCoreWidth(){
