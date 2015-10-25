@@ -18,6 +18,11 @@ namespace libchart\object;
 use libchart\Canvas;
 
 abstract class PaddedChartObject extends ChartObject{
+	/** @var bool */
+	private $borders;
+	/** @var int */
+	private $margin;
+
 	public abstract function getTopPadding();
 	public abstract function getBottomPadding();
 	public abstract function getLeftPadding();
@@ -35,5 +40,9 @@ abstract class PaddedChartObject extends ChartObject{
 	}
 	public function getHeight(){
 		return $this->getTopPadding() + $this->getCoreHeight() + $this->getBottomPadding();
+	}
+	public function setBorders($on, $margin = 0){
+		$this->borders = $on;
+		$this->margin = $margin;
 	}
 }

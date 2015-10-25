@@ -17,6 +17,7 @@ namespace libchart\object;
 
 use IllegalStateException;
 use libchart\Canvas;
+use libchart\Palette;
 
 abstract class ChartObject{
 	private static $nextId = 0;
@@ -50,5 +51,15 @@ abstract class ChartObject{
 	 */
 	public function getObjectId(){
 		return $this->objectId;
+	}
+
+	/**
+	 * @return resource
+	 */
+	public function getImage(){
+		$img = imagecreatetruecolor($this->getWidth(), $this->getHeight());
+		$canvas = new Canvas(new Palette($img), 0, 0);
+		$this->draw($canvas);
+		return $img;
 	}
 }

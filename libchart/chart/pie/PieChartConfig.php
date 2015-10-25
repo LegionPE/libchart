@@ -19,7 +19,7 @@ use libchart\chart\GeneralChartConfig;
 
 class PieChartConfig extends GeneralChartConfig{
 	public $radius;
-	public $keyColor;
+	public $keyTitleColor;
 	public $keyTitleFontSize;
 	public $keyTextFontSize;
 }

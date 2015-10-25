@@ -16,17 +16,22 @@
 namespace libchart\chart\pie;
 
 use libchart\object\LinearChartObjectLayout;
+use libchart\object\TextObject;
 
-class PieChartBody extends LinearChartObjectLayout{
+class PieChartKeys extends LinearChartObjectLayout{
 	/** @var PieChart */
 	private $main;
+
 	public function __construct(PieChart $main){
-		parent::__construct(self::ORIENTATION_HORIZONTAL);
+		parent::__construct();
 		$this->main = $main;
 		$this->init();
 	}
 	protected function init(){
-		$this->addObject(new Pie($this->main));
-		$this->addObject(new PieChartKeys($this->main));
+		$this->addObject(TextObject::fromLeftTop(0, 0, "Keys", $this->main->getConfig()->keyTitleFontSize, $this->main->getConfig()->keyTitleColor, FONT_BOLD, 5, 5));
+		foreach($this->main->data as $datum){
+			$this->addObject(TextObject::fromLeftTop(0, 0, $datum->name . ": " . $datum->value, $this->main->getConfig()->keyTextFontSize, $datum->rgb, FONT_NORM, 5, 5));
+		}
+		$this->setBorders(true, 10);
 	}
 }
